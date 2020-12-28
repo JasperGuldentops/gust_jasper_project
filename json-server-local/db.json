@@ -1,0 +1,78 @@
+{
+    "bills": [
+        {
+            "id": 1,
+            "date": null,
+            "shop": "Delhaize",
+            "billTo": null
+        },
+        {
+            "id": 2,
+            "date": null,
+            "shop": "Colruyt",
+            "billTo": null
+        },
+        {
+            "id": 3,
+            "date": null,
+            "shop": "Carrefour",
+            "billTo": null
+        }
+    ],
+    "billItems": [
+        {
+            "id": 1,
+            "billId": 1,
+            "prodcut": "Banana",
+            "price": 19.55
+        },
+        {
+            "id": 2,
+            "billId": 2,
+            "prodcut": "Gin",
+            "price": 35.88
+        },
+        {
+            "id": 3,
+            "billId": 2,
+            "prodcut": "Tonic",
+            "price": 4.12
+        },
+        {
+            "id": 4,
+            "billId": 2,
+            "prodcut": "Vodka",
+            "price": 26.66
+        },
+        {
+            "id": 5,
+            "billId": 2,
+            "prodcut": "Redbull",
+            "price": 5.48
+        },
+        {
+            "id": 6,
+            "billId": 2,
+            "prodcut": "Rum",
+            "price": 38.89
+        },
+        {
+            "id": 7,
+            "billId": 2,
+            "prodcut": "Coke",
+            "price": 12.47
+        },
+        {
+            "id": 8,
+            "billId": 2,
+            "prodcut": "New Years Eve Party Banner",
+            "price": 13.99
+        },
+        {
+            "id": 9,
+            "billId": 3,
+            "prodcut": "Water",
+            "price": 6.99
+        }
+    ]
+}
