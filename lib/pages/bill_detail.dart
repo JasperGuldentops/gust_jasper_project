@@ -3,7 +3,7 @@ import 'package:gust_jasper_project/apis/bill_api.dart';
 import 'package:gust_jasper_project/models/bill.dart';
 import 'package:gust_jasper_project/models/bill_item.dart';
 
-final List<String> choices = const <String>['Save Bill', 'Delete Bill'];
+final List<String> choices = const <String>['Save', 'Delete'];
 
 class BillDetailPage extends StatefulWidget {
   final int id; // id of Bill to show
@@ -63,12 +63,7 @@ class _BillDetailPageState extends State {
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),
-        //child: _billDetails(),
-        child: Column(
-          children: [
-            _billDetails(),
-          ],
-        ),
+        child: _billDetails(),
       ),
     );
   }
@@ -122,39 +117,63 @@ class _BillDetailPageState extends State {
               height: 10,
               padding: EdgeInsets.all(5.0),
               child: _billItemsList(bill),
-            )
+            ),
           ],
         ),
       );
     }
   }
 
-  ListView _billItemsList(Bill bill) {
-    return ListView.builder(
-      itemCount: bill.billItems.length,
-      itemBuilder: (BuildContext context, int position) {
-        return Card(
-          color: Colors.white,
-          elevation: 2.0,
-          child: ListTile(
-            title: Text(bill.billItems[position].product),
-            subtitle: Text(bill.billItems[position].price.toString() + " €"),
+  SizedBox _billItemsList(Bill bill) {
+    return SizedBox.expand(
+      child: DataTable(
+        headingRowColor:
+            MaterialStateProperty.resolveWith<Color>((states) => Colors.blue),
+        columns: const <DataColumn>[
+          DataColumn(
+            label: Text('Product'),
           ),
-        );
-      },
+          DataColumn(
+            label: Text('Price in €'),
+          ),
+        ],
+        rows: List<DataRow>.generate(
+          bill.billItems.length, //The amount of rows to generate
+          (index) => DataRow(
+            color: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+              // Set even rows to gray color
+              if (index % 2 == 0) return Colors.grey.withOpacity(0.3);
+              return null; // Set non even rows to default color
+            }),
+            cells: [
+              DataCell(
+                Container(
+                  width: 100,
+                  child: Text(bill.billItems[index].product),
+                ),
+              ),
+              DataCell(
+                Text(_getProductPrice(bill.billItems[index])),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
+  }
+
+  String _getProductPrice(BillItem billItem) {
+    return billItem.price.toString().replaceAll('.', ',');
   }
 
   void _menuSelected(String index) async {
     switch (index) {
-      case "0": // Save User & Back
+      case "0": // Save Bill
         _saveBill();
         break;
-      case "1": // Delete User
+      case "1": // Delete Bill
         _deleteBill();
-        break;
-      case "2": // Back to List
-        Navigator.pop(context, true);
         break;
       default:
     }

@@ -20,10 +20,10 @@ class _HomePageState extends State {
         title: Text("Title in App Bar"),
       ),
       body: new Material(
-        color: Colors.pink,
+        color: Colors.white,
         child: Center(
           child: ElevatedButton(
-            child: Text('Open route'),
+            child: Text('Bills list'),
             onPressed: () {
               _navigateList();
             },
