@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gust_jasper_project/pages/bill_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,31 +20,23 @@ class _HomePageState extends State {
         title: Text("Title in App Bar"),
       ),
       body: new Material(
-        color: Colors.deepPurple,
+        color: Colors.pink,
         child: Center(
-          child: new Text(
-            sayHello(),
-            textDirection: TextDirection.ltr,
-            style: TextStyle(color: Colors.white, fontSize: 36.0),
+          child: ElevatedButton(
+            child: Text('Open route'),
+            onPressed: () {
+              _navigateList();
+            },
           ),
         ),
       ),
     );
   }
-}
 
-String sayHello() {
-  String hello;
-  DateTime now = new DateTime.now();
-  int hour = now.hour;
-
-  if (hour < 12) {
-    hello = "Good Morning";
-  } else if (hour < 18) {
-    hello = "Good Afternoon";
-  } else {
-    hello = "Good Evening";
+  void _navigateList() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BillListPage()),
+    );
   }
-
-  return hello;
 }
