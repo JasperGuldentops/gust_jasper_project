@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class BillApi {
-  static String url = 'https://wicked-panda-94.loca.lt';
+  static String url = 'https://big-mule-89.loca.lt';
   //static String url = 'http://localhost:3000';
 
   static Future<List<Bill>> fetchBills() async {
