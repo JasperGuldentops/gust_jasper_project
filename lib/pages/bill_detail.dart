@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gust_jasper_project/apis/bill_api.dart';
 import 'package:gust_jasper_project/models/bill.dart';
+import 'package:gust_jasper_project/models/bill_item.dart';
 
-final List<String> choices = const <String>[
-  'Save User & Back',
-  'Delete User',
-  'Back to List'
-];
+final List<String> choices = const <String>['Save Bill', 'Delete Bill'];
 
 class BillDetailPage extends StatefulWidget {
   final int id; // id of Bill to show
@@ -66,14 +63,19 @@ class _BillDetailPageState extends State {
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),
-        child: _userDetails(),
+        //child: _billDetails(),
+        child: Column(
+          children: [
+            _billDetails(),
+          ],
+        ),
       ),
     );
   }
 
-  _userDetails() {
+  _billDetails() {
     if (bill == null) {
-      // show a ProgressIndicator as long as there's no user info
+      // show a ProgressIndicator as long as there's no bill info
       return Center(child: CircularProgressIndicator());
     } else {
       TextStyle textStyle = Theme.of(context).textTheme.bodyText1;
@@ -116,10 +118,31 @@ class _BillDetailPageState extends State {
             Container(
               height: 15,
             ),
+            Container(
+              height: 10,
+              padding: EdgeInsets.all(5.0),
+              child: _billItemsList(bill),
+            )
           ],
         ),
       );
     }
+  }
+
+  ListView _billItemsList(Bill bill) {
+    return ListView.builder(
+      itemCount: bill.billItems.length,
+      itemBuilder: (BuildContext context, int position) {
+        return Card(
+          color: Colors.white,
+          elevation: 2.0,
+          child: ListTile(
+            title: Text(bill.billItems[position].product),
+            subtitle: Text(bill.billItems[position].price.toString() + " €"),
+          ),
+        );
+      },
+    );
   }
 
   void _menuSelected(String index) async {
