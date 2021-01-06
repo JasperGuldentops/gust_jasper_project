@@ -1,7 +1,7 @@
 import 'package:gust_jasper_project/helpers/helper.dart';
 
 class CryptoCurrency {
-  int id;
+  String id;
   String name;
   double price;
   double amount;
@@ -11,7 +11,7 @@ class CryptoCurrency {
 
   factory CryptoCurrency.fromJson(Map<String, dynamic> json) {
     return CryptoCurrency(
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
       price: Helper.numberToDouble(json['price']),
       amount: Helper.numberToDouble(json['amount']),

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CryptoCurrencyApi {
-  static String url = 'https://soft-penguin-79.loca.lt';
+  static String url = 'https://big-chicken-15.loca.lt';
   //static String url = 'http://localhost:3000';
 
   static Future<List<CryptoCurrency>> fetchCurrencies() async {
@@ -19,8 +19,8 @@ class CryptoCurrencyApi {
     }
   }
 
-  static Future<CryptoCurrency> fetchCurrency(int id) async {
-    final response = await http.get(url + '/cryptocurrencies/' + id.toString());
+  static Future<CryptoCurrency> fetchCurrency(String id) async {
+    final response = await http.get(url + '/cryptocurrencies/' + id);
     if (response.statusCode == 200) {
       return CryptoCurrency.fromJson(jsonDecode(response.body));
     } else {
@@ -44,9 +44,9 @@ class CryptoCurrencyApi {
   }
 
   static Future<CryptoCurrency> updateCurrency(
-      int id, CryptoCurrency currency) async {
+      String id, CryptoCurrency currency) async {
     final http.Response response = await http.put(
-      url + '/cryptocurrencies/' + id.toString(),
+      url + '/cryptocurrencies/' + id,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -59,9 +59,9 @@ class CryptoCurrencyApi {
     }
   }
 
-  static Future deleteCurrency(int id) async {
+  static Future deleteCurrency(String id) async {
     final http.Response response =
-        await http.delete(url + '/cryptocurrencies/' + id.toString());
+        await http.delete(url + '/cryptocurrencies/' + id);
     if (response.statusCode == 200) {
       return;
     } else {

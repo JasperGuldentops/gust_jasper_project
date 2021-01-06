@@ -75,7 +75,7 @@ class _CurrencyListPageState extends State {
     );
   }
 
-  void _navigateToDetail(int id) async {
+  void _navigateToDetail(String id) async {
     bool result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CurrencyDetailPage(id)),
