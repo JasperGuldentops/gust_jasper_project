@@ -2,8 +2,6 @@
 <head>
     <meta name="viewport" content="width = 200, user-scalable = 0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/url.js"></script>
-
 </head>
 <body>
     <h1 id="name">Not Loaded</h1>
@@ -15,6 +13,9 @@
         $(document).ready(function(){
             getData();
         });
+
+        var url = 'https://neat-elephant-44.loca.lt';
+
         function getData(){
             $.getJSON('https://data.messari.io/api/v1/assets/eth/metrics', function(data) {
                 // In data zit alle data die binnenkomt van de API
@@ -24,6 +25,9 @@
                 var dataDate = data.status.timestamp
                 $('#time').text(dataDate.substring(11,19));
                 $('#date').text(dataDate.substring(0,10));
+                
+                //run data through check
+                checkData(data);
             });
         }
 

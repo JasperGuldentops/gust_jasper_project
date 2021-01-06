@@ -1,1 +1,0 @@
-var url = 'https://big-chicken-15.loca.lt';
