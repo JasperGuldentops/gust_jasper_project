@@ -2,6 +2,8 @@
 <head>
     <meta name="viewport" content="width = 200, user-scalable = 0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/url.js"></script>
+
 </head>
 <body>
     <h1 id="name">Not Loaded</h1>
@@ -16,16 +18,58 @@
         function getData(){
             $.getJSON('https://data.messari.io/api/v1/assets/eth/metrics', function(data) {
                 // In data zit alle data die binnenkomt van de API
-            $('#name').text(data.data.name); 
-            var price = Math.round(data.data.market_data.price_usd*10000)/10000;
-            $('#price').text(price);
-            var dataDate = data.status.timestamp
-            $('#time').text(dataDate.substring(11,19));
-            $('#date').text(dataDate.substring(0,10));
-        });
-        // Hier moet dan een postJSON komen https://www.w3schools.com/jquery/ajax_post.asp
-        
-        
+                $('#name').text(data.data.name); 
+                var price = Math.round(data.data.market_data.price_usd*10000)/10000;
+                $('#price').text(price);
+                var dataDate = data.status.timestamp
+                $('#time').text(dataDate.substring(11,19));
+                $('#date').text(dataDate.substring(0,10));
+            });
+        }
+
+        function checkData(data) {
+            var currency = new Object();
+
+            $.getJSON(url + '/cryptocurrencies/' + data.data.id, function(localData) {
+                //If data is found, update only the price
+                currency.id = localData.id;
+                currency.name = localData.name;
+                currency.price = data.data.market_data.price_usd;
+                currency.webUrl = localData.webUrl;
+                currency.amount = localData.amount;
+
+                putData(currency);
+            })
+            .fail(function() {
+                //If request returns nothing (404) create new data
+                currency.id = data.data.id;
+                currency.name = data.data.name;
+                currency.price = data.data.market_data.price_usd;
+                currency.webUrl = "www." + data.data.name + ".com"
+                currency.amount = 0.0;
+                    
+                postData(currency);
+            });
+        }
+
+        function postData(currency) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", url + "/cryptocurrencies", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(currency));
+            xhr.onloadend = function () {
+                console.log('New data posted');
+            };
+        }
+
+        function putData(currency) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", url + "/cryptocurrencies/" + currency.id, true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify(currency));
+            xhr.onloadend = function () {
+                console.log('Data updated');
+            };
         }
         
     </script>
