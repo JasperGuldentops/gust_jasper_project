@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gust_jasper_project/pages/bill_list.dart';
+import 'package:gust_jasper_project/pages/currency_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,7 +10,6 @@ class _HomePageState extends State {
   @override
   void initState() {
     super.initState();
-    //_getUsers();
   }
 
   @override
@@ -19,11 +18,18 @@ class _HomePageState extends State {
       appBar: AppBar(
         title: Text("Title in App Bar"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToScan();
+        },
+        tooltip: "Scan for crypto currency",
+        child: new Icon(Icons.camera_alt),
+      ),
       body: new Material(
         color: Colors.white,
         child: Center(
           child: ElevatedButton(
-            child: Text('Bills list'),
+            child: Text('All crypto currencies'),
             onPressed: () {
               _navigateList();
             },
@@ -36,7 +42,11 @@ class _HomePageState extends State {
   void _navigateList() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BillListPage()),
+      MaterialPageRoute(builder: (context) => CurrencyListPage()),
     );
+  }
+
+  void _navigateToScan() {
+    //Navigate to wikitude nonsense
   }
 }
