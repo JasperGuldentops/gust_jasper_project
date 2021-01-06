@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CryptoCurrencyApi {
-  static String url = 'https://tricky-kangaroo-35.loca.lt';
+  static String url = 'https://soft-penguin-79.loca.lt';
   //static String url = 'http://localhost:3000';
 
   static Future<List<CryptoCurrency>> fetchCurrencies() async {

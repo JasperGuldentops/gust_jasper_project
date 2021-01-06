@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gust_jasper_project/apis/currency_api.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final List<String> choices = const <String>['Save', 'Delete'];
 
@@ -26,7 +28,8 @@ class _CurrencyDetailPageState extends State {
   void initState() {
     super.initState();
     if (id == null) {
-      currency = new CryptoCurrency(name: "", price: 0, amount: 0, webUrl: "");
+      currency =
+          new CryptoCurrency(name: "", price: 0.0, amount: 0.0, webUrl: "");
     } else {
       _getCurrency(id);
     }
@@ -45,7 +48,9 @@ class _CurrencyDetailPageState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currency.name.capitalize() + " details"),
+        title: Text(currency == null
+            ? 'loading'
+            : currency.name.capitalize() + " details"),
         actions: <Widget>[
           PopupMenuButton<String>(
             onSelected: _menuSelected,
@@ -81,16 +86,47 @@ class _CurrencyDetailPageState extends State {
         padding: EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            TextField(
-              style: textStyle,
-              keyboardType: TextInputType.text,
-              readOnly: true,
-              decoration: InputDecoration(
-                labelText: "Currency Name",
-                labelStyle: textStyle,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
+            Text(
+              //Show the price
+              _priceText(),
+              style: TextStyle(
+                fontSize: 20.0,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            Container(
+              height: 15,
+            ),
+            RichText(
+              text: TextSpan(
+                //Holds both website and URL text
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
                 ),
+                children: [
+                  TextSpan(
+                    text: "Website: ",
+                  ),
+                  TextSpan(
+                    text: currency.webUrl, //Set text to URL
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        final url = currency.webUrl; //URL that will be linked
+                        if (await canLaunch(url)) {
+                          await launch(
+                            url,
+                            forceSafariVC: false,
+                          );
+                        }
+                      },
+                  ),
+                ],
               ),
             ),
             Container(
@@ -108,21 +144,13 @@ class _CurrencyDetailPageState extends State {
                 ),
               ),
             ),
-            Container(
-              height: 15,
-            ),
-            Container(
-              height: 10,
-              padding: EdgeInsets.all(5.0),
-              child: Text(_priceText(currency)),
-            ),
           ],
         ),
       );
     }
   }
 
-  String _priceText(CryptoCurrency currency) {
+  String _priceText() {
     return "Price: " + currency.price.toString().replaceAll('.', ',') + " €";
   }
 
@@ -139,7 +167,7 @@ class _CurrencyDetailPageState extends State {
   }
 
   void _saveCurrency() {
-    currency.amount = int.parse(amountController.text);
+    currency.amount = double.parse(amountController.text);
 
     if (currency.id == null) {
       //if no id is available make new currency

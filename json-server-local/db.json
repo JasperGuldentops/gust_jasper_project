@@ -1,37 +1,37 @@
 {
-    "currencies": [
+    "cryptocurrencies": [
       {
         "id": 1,
         "name": "Bitcoin",
-        "price": 28000,
+        "price": 28000.56,
         "amount": 5,
         "webUrl": "www.bitcoin.com"
       },
       {
         "id": 2,
         "name": "bobcoin",
-        "price": 150,
+        "price": 150.66,
         "amount": 1,
         "webUrl": "www.bobcoin.com"
       },      
       {
         "id": 3,
         "name": "COIN",
-        "price": 56,
+        "price": 56.59,
         "amount": 0,
         "webUrl": "www.coin.com"
       },      
       {
         "id": 4,
         "name": "DOGECOIN",
-        "price": 886,
+        "price": 886.12,
         "amount": 0,
         "webUrl": "www.dogecoin.com"
       },      
       {
         "id": 5,
         "name": "litecoin",
-        "price": 33.6,
+        "price": 33.00,
         "amount": 0,
         "webUrl": "www.litecoin.com"
       }

@@ -1,3 +1,5 @@
+import 'package:gust_jasper_project/helpers/helper.dart';
+
 class CryptoCurrency {
   int id;
   String name;
@@ -11,8 +13,8 @@ class CryptoCurrency {
     return CryptoCurrency(
       id: json['id'],
       name: json['name'],
-      price: json['price'],
-      amount: json['amount'],
+      price: Helper.numberToDouble(json['price']),
+      amount: Helper.numberToDouble(json['amount']),
       webUrl: json['webUrl'],
     );
   }
