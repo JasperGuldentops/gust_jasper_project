@@ -58,12 +58,16 @@ var World = {
                 var coinWidget = new AR.HtmlDrawable({
                     uri: "assets/"+target.name+".html"
                 }, 0.25, {
-                    viewportWidth: 400,
-                    viewportHeight: 400,
+                    viewportWidth: 200,
+                    viewportHeight: 200,
                     backgroundColor: "#FFFFFF",
                     translate: {
                         x:0.36,
                         y: 0.5
+                    },
+                    scale:{
+                        x:2,
+                        y:2
                     },
                     horizontalAnchor: AR.CONST.HORIZONTAL_ANCHOR.RIGHT,
                     verticalAnchor: AR.CONST.VERTICAL_ANCHOR.TOP,
@@ -74,7 +78,7 @@ var World = {
                     }
                 });
 
-                /* Adds the model as augmentation for the currently recognized target. */
+                /* Adds the Html page as augmentation for the currently recognized target. */
                 this.addImageTargetCamDrawables(target, coinWidget);
 
                 World.hideInfoBar();
