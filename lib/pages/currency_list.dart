@@ -41,7 +41,7 @@ class _CurrencyListPageState extends State {
           _navigateToScan();
         },
         tooltip: "Scan for crypto currency",
-        child: new Icon(Icons.add),
+        child: new Icon(Icons.camera_alt),
       ),
       body: Container(
         padding: EdgeInsets.all(5.0),

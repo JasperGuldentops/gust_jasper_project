@@ -18,6 +18,13 @@ class _HomePageState extends State {
       appBar: AppBar(
         title: Text("Title in App Bar"),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToScan();
+        },
+        tooltip: "Scan for crypto currency",
+        child: new Icon(Icons.camera_alt),
+      ),
       body: new Material(
         color: Colors.white,
         child: Center(
@@ -37,5 +44,9 @@ class _HomePageState extends State {
       context,
       MaterialPageRoute(builder: (context) => CurrencyListPage()),
     );
+  }
+
+  void _navigateToScan() {
+    //Navigate to wikitude nonsense
   }
 }
