@@ -39,3 +39,6 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+plugin/augmented_reality_plugin_wikitude/android/local.properties
+plugin/augmented_reality_plugin_wikitude/pubspec.lock
+pubspec.lock
