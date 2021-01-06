@@ -2,7 +2,6 @@
 <head>
     <meta name="viewport" content="width = 200, user-scalable = 0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="../js/url.js"></script>
 </head>
 <body>
     <h1 id="name">Not Loaded</h1>
@@ -14,6 +13,8 @@
         $(document).ready(function(){
             getData();
         });
+
+        var url = 'https://odd-ladybug-8.loca.lt';
 
         function getData(){
             $.getJSON('https://data.messari.io/api/v1/assets/dogecoin/metrics', function(data) {
@@ -57,15 +58,30 @@
         }
 
         function postData(currency) {
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", url + "/cryptocurrencies", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(JSON.stringify(currency));
-            xhr.onloadend = function () {
-                console.log('New data posted');
-            };
+            $.ajax
+            ({
+                    type: "POST",
+                    //the url where you want to sent the userName and password to
+                    url: url + "/cryptocurrencies",
+                    dataType: 'json',
+                    async: false,
+                    //json object to sent to the authentication url
+                    data: JSON.stringify(currency),
+                    success: function () {
+                        alert("Thanks!"); 
+                    }
+            });
         }
 
+        // function postData(currency) {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("POST", url + "/cryptocurrencies", true);
+        //     xhr.setRequestHeader("Content-Type", "application/json");
+        //     xhr.send(JSON.stringify(currency));
+        //     xhr.onloadend = function () {
+        //         console.log('New data posted');
+        //     };
+        // }
         function putData(currency) {
             var xhr = new XMLHttpRequest();
             xhr.open("PUT", url + "/cryptocurrencies/" + currency.id, true);
