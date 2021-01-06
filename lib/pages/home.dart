@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gust_jasper_project/pages/bill_list.dart';
+import 'package:gust_jasper_project/pages/currency_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,7 +36,7 @@ class _HomePageState extends State {
   void _navigateList() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BillListPage()),
+      MaterialPageRoute(builder: (context) => CurrencyListPage()),
     );
   }
 }

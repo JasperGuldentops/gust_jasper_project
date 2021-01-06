@@ -1,78 +1,39 @@
 {
-  "bills": [
-    {
-      "date": null,
-      "shop": "Delhaize",
-      "billTo": "Jasper",
-      "id": 1
-    },
-    {
-      "date": null,
-      "shop": "Yoink",
-      "billTo": "",
-      "id": 2
-    },
-    {
-      "id": 3,
-      "date": null,
-      "shop": "Carrefour",
-      "billTo": null
-    }
-  ],
-  "billItems": [
-    {
-      "id": 1,
-      "billId": 1,
-      "product": "Banana",
-      "price": 19.55
-    },
-    {
-      "id": 2,
-      "billId": 2,
-      "product": "Gin",
-      "price": 35.88
-    },
-    {
-      "id": 3,
-      "billId": 2,
-      "product": "Tonic",
-      "price": 4.12
-    },
-    {
-      "id": 4,
-      "billId": 2,
-      "product": "Vodka",
-      "price": 26.66
-    },
-    {
-      "id": 5,
-      "billId": 2,
-      "product": "Redbull",
-      "price": 5.48
-    },
-    {
-      "id": 6,
-      "billId": 2,
-      "product": "Rum",
-      "price": 38.89
-    },
-    {
-      "id": 7,
-      "billId": 2,
-      "product": "Coke",
-      "price": 12.47
-    },
-    {
-      "id": 8,
-      "billId": 2,
-      "product": "New Years Eve Party Banner",
-      "price": 13.99
-    },
-    {
-      "id": 9,
-      "billId": 3,
-      "product": "Water",
-      "price": 6.99
-    }
-  ]
-}
+    "currencies": [
+      {
+        "id": 1,
+        "name": "Bitcoin",
+        "price": 28000,
+        "amount": 5,
+        "webUrl": "www.bitcoin.com"
+      },
+      {
+        "id": 2,
+        "name": "bobcoin",
+        "price": 150,
+        "amount": 1,
+        "webUrl": "www.bobcoin.com"
+      },      
+      {
+        "id": 3,
+        "name": "COIN",
+        "price": 56,
+        "amount": 0,
+        "webUrl": "www.coin.com"
+      },      
+      {
+        "id": 4,
+        "name": "DOGECOIN",
+        "price": 886,
+        "amount": 0,
+        "webUrl": "www.dogecoin.com"
+      },      
+      {
+        "id": 5,
+        "name": "litecoin",
+        "price": 33.6,
+        "amount": 0,
+        "webUrl": "www.litecoin.com"
+      }
+    ]
+  }
