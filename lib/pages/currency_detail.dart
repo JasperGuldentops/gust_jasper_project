@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gust_jasper_project/apis/currency_api.dart';
+import 'package:gust_jasper_project/helpers/helper.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -88,7 +90,7 @@ class _CurrencyDetailPageState extends State {
           children: <Widget>[
             Text(
               //Show the price
-              _priceText(),
+              Helper.doubleToPriceString(currency.price),
               style: TextStyle(
                 fontSize: 20.0,
                 decoration: TextDecoration.none,
@@ -129,18 +131,30 @@ class _CurrencyDetailPageState extends State {
                 ],
               ),
             ),
-            Container(
-              height: 15,
+            const Divider(
+              color: Colors.black,
+              height: 50,
+              thickness: 1,
+              indent: 0,
+              endIndent: 0,
             ),
-            TextField(
-              controller: amountController,
-              style: textStyle,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: "Amount owned",
-                labelStyle: textStyle,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
+            Container(
+              width: 200,
+              child: TextField(
+                controller: amountController,
+                style: textStyle,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(
+                    RegExp(r"^\d*\.?\d*"),
+                  )
+                ],
+                decoration: InputDecoration(
+                  labelText: "Owned " + currency.name,
+                  labelStyle: textStyle,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
                 ),
               ),
             ),
@@ -148,10 +162,6 @@ class _CurrencyDetailPageState extends State {
         ),
       );
     }
-  }
-
-  String _priceText() {
-    return "Price: " + currency.price.toString().replaceAll('.', ',') + " €";
   }
 
   void _menuSelected(String index) async {

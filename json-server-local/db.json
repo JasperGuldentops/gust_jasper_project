@@ -1,39 +1,39 @@
 {
-    "cryptocurrencies": [
-      {
-        "id": 1,
-        "name": "Bitcoin",
-        "price": 28000.56,
-        "amount": 5,
-        "webUrl": "www.bitcoin.com"
-      },
-      {
-        "id": 2,
-        "name": "bobcoin",
-        "price": 150.66,
-        "amount": 1,
-        "webUrl": "www.bobcoin.com"
-      },      
-      {
-        "id": 3,
-        "name": "COIN",
-        "price": 56.59,
-        "amount": 0,
-        "webUrl": "www.coin.com"
-      },      
-      {
-        "id": 4,
-        "name": "DOGECOIN",
-        "price": 886.12,
-        "amount": 0,
-        "webUrl": "www.dogecoin.com"
-      },      
-      {
-        "id": 5,
-        "name": "litecoin",
-        "price": 33.00,
-        "amount": 0,
-        "webUrl": "www.litecoin.com"
-      }
-    ]
-  }
+  "cryptocurrencies": [
+    {
+      "name": "Bitcoin",
+      "price": 28000.56,
+      "amount": 8,
+      "webUrl": "www.bitcoin.com",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "bobcoin",
+      "price": 150.66,
+      "amount": 1,
+      "webUrl": "www.bobcoin.com"
+    },
+    {
+      "name": "COIN",
+      "price": 56.59,
+      "amount": 1,
+      "webUrl": "www.coin.com",
+      "id": 3
+    },
+    {
+      "name": "DOGECOIN",
+      "price": 886.12,
+      "amount": 1.6,
+      "webUrl": "www.dogecoin.com",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "name": "litecoin",
+      "price": 33,
+      "amount": 0,
+      "webUrl": "www.litecoin.com"
+    }
+  ]
+}

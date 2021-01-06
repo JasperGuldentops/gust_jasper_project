@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gust_jasper_project/apis/currency_api.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/pages/currency_detail.dart';
+import 'package:gust_jasper_project/helpers/helper.dart';
 
 class CurrencyListPage extends StatefulWidget {
   @override
@@ -59,10 +60,12 @@ class _CurrencyListPageState extends State {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.pink,
-              child: Text(this.currencies[position].name.substring(0, 1)),
+              child: Text(
+                  this.currencies[position].name.substring(0, 1).toUpperCase()),
             ),
             title: Text(this.currencies[position].name),
-            subtitle: Text(_priceText(this.currencies[position])),
+            subtitle: Text(
+                Helper.doubleToPriceString(this.currencies[position].price)),
             onTap: () {
               _navigateToDetail(this.currencies[position].id);
             },
@@ -84,9 +87,5 @@ class _CurrencyListPageState extends State {
 
   void _navigateToScan() {
     //Navigate to wikitude nonsense
-  }
-
-  String _priceText(CryptoCurrency currency) {
-    return "Price: " + currency.price.toString().replaceAll('.', ',') + " €";
   }
 }

@@ -10,7 +10,6 @@ class _HomePageState extends State {
   @override
   void initState() {
     super.initState();
-    //_getUsers();
   }
 
   @override
@@ -23,7 +22,7 @@ class _HomePageState extends State {
         color: Colors.white,
         child: Center(
           child: ElevatedButton(
-            child: Text('Bills list'),
+            child: Text('All crypto currencies'),
             onPressed: () {
               _navigateList();
             },

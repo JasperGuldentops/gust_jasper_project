@@ -7,4 +7,8 @@ class Helper {
     }
     return 0.00;
   }
+
+  static String doubleToPriceString(double price) {
+    return "Price: " + price.toStringAsFixed(2).replaceAll('.', ',') + " €";
+  }
 }
