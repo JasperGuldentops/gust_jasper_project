@@ -58,7 +58,6 @@ flutter:
     - samples/js/
     - samples/css/
     - samples/assets/
-    - samples/assets/models/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
