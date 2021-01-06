@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta name="viewport" content="width = 400, user-scalable = 0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id="name">Not Loaded</h1>
+    <p>Prijs: <span id="price">Not Loaded</span> USD</p>
+    <p>Time update: <span id="time">Not Loaded</span></p>
+    <p>Date update: <span id="date">Not Loaded</span></p>
+
+    <script>
+        $(document).ready(function(){
+            getData();
+        });
+        function getData(){
+            $.getJSON('https://data.messari.io/api/v1/assets/btc/metrics', function(data) {
+                // In data zit alle data die binnenkomt van de API
+            $('#name').text(data.data.name); 
+            var price = Math.round(data.data.market_data.price_usd*10000)/10000;
+            $('#price').text(price);
+            var dataDate = data.status.timestamp
+            $('#time').text(dataDate.substring(11,19));
+            $('#date').text(dataDate.substring(0,10));
+        });
+        // Hier moet dan een postJSON komen https://www.w3schools.com/jquery/ajax_post.asp
+        
+        
+        }
+        
+    </script>
+</body>
+</html>
