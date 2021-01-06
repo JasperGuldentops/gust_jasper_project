@@ -14,7 +14,7 @@
             getData();
         });
         function getData(){
-            $.getJSON('https://data.messari.io/api/v1/assets/btc/metrics', function(data) {
+            $.getJSON('https://data.messari.io/api/v1/assets/ltc/metrics', function(data) {
                 // In data zit alle data die binnenkomt van de API
             $('#name').text(data.data.name); 
             var price = Math.round(data.data.market_data.price_usd*10000)/10000;
