@@ -10,7 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 final List<String> choices = const <String>['Save', 'Delete'];
 
 class CurrencyDetailPage extends StatefulWidget {
-  final int id; // id of Currency to show
+  final String id; // id of Currency to show
   CurrencyDetailPage(this.id);
 
   @override
@@ -18,7 +18,7 @@ class CurrencyDetailPage extends StatefulWidget {
 }
 
 class _CurrencyDetailPageState extends State {
-  int id; // id of currency to show
+  String id; // id of currency to show
   _CurrencyDetailPageState(this.id);
 
   CryptoCurrency currency; //the currency about which we show details
@@ -37,7 +37,7 @@ class _CurrencyDetailPageState extends State {
     }
   }
 
-  void _getCurrency(int id) {
+  void _getCurrency(String id) {
     CryptoCurrencyApi.fetchCurrency(id).then((result) {
       // call the api to fetch the currency data
       setState(() {
