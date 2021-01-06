@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gust_jasper_project/pages/arcrypto.dart';
 import 'package:gust_jasper_project/pages/currency_list.dart';
+import 'package:augmented_reality_plugin_wikitude/wikitude_plugin.dart';
+import 'package:augmented_reality_plugin_wikitude/wikitude_response.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,6 +10,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State {
+  List<String> features = ["image_tracking"];
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +44,8 @@ class _HomePageState extends State {
     );
   }
 
+  void navigateToAR() {}
+
   void _navigateList() {
     Navigator.push(
       context,
@@ -46,7 +53,36 @@ class _HomePageState extends State {
     );
   }
 
-  void _navigateToScan() {
-    //Navigate to wikitude nonsense
+  Future<WikitudeResponse> checkDeviceCompatibility() async {
+    return await WikitudePlugin.isDeviceSupporting(this.features);
   }
-}
+
+  Future<WikitudeResponse> requestARPermissions() async {
+    return await WikitudePlugin.requestARPermissions(this.features);
+  }
+    void _navigateToScan() {
+      this.checkDeviceCompatibility().then((value) => {
+            if (value.success)
+              {
+                this.requestARPermissions().then((value) => {
+                      if (value.success)
+                        {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ARCryptoPage()),
+                          )
+                        }
+                      else
+                        {
+                          debugPrint("AR permissions denied"),
+                          debugPrint(value.message)
+                        }
+                    })
+              }
+            else
+              {debugPrint("Device incompatible"), debugPrint(value.message)}
+          });
+    }
+  }
+

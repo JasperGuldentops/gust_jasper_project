@@ -1,4 +1,4 @@
-package com.example.gust_jasper_project
+package be.thomasmore.mobiledev
 
 import io.flutter.embedding.android.FlutterActivity
 
