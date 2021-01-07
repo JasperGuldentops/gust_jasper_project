@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta name="viewport" content="width = 250, user-scalable = 0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/apiupdater.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+    *{margin:0; padding:0;}
+    #card{border:solid 1px black;}
+    #price{margin-left:10px;margin-right:10px;}
+</style>
+</head>
+<body class="bg-primary text-white">
+<div id="card" class="container">
+    <h1 id="name" class="">Loading...</h1>
+    <div class="row">
+        <h2 ><span id="price" class="badge badge-success">Loading...</span> </h2>
+    </div>
+    <hr/>
+
+    <p>Last updated: <br/><span id="time">Loading...</span>   <span id="date"></span></p>
+</div>
+    
+
+    <script>
+        $(document).ready(function(){
+             getData();
+
+        });
+       
+        var url = 'https://honest-badger-24.loca.lt';
+
+        function getData(){
+            var str = window.location.href;
+            var coin = str.substring(str.search("name=")+5,str.length-2);
+            $.getJSON('https://data.messari.io/api/v1/assets/'+coin+'/metrics', function(data) {
+                // In data zit alle data die binnenkomt van de API
+                $('#name').text(data.data.name); 
+                var price = Math.round(data.data.market_data.price_usd*10000)/10000;
+                $('#price').text(price+" $");
+                var dataDate = data.status.timestamp
+                $('#time').text(dataDate.substring(11,19));
+                $('#date').text(dataDate.substring(0,10));
+
+                //run data through check
+                checkData(data);
+            });
+        }
+
+        
+
+    </script>
+</body>
+</html>

@@ -56,9 +56,9 @@ var World = {
         this.coinTrackable = new AR.ImageTrackable(this.tracker, "*", {
             onImageRecognized: function(target) {
                 var coinWidget = new AR.HtmlDrawable({
-                    uri: "assets/"+target.name+".html"
+                    uri: "assets/coin.html?name="+target.name
                 }, 0.25, {
-                    viewportWidth: 200,
+                    viewportWidth: 250,
                     viewportHeight: 200,
                     backgroundColor: "#FFFFFF",
                     translate: {
@@ -77,7 +77,6 @@ var World = {
                         AR.context.openInBrowser(uri);
                     }
                 });
-
                 /* Adds the Html page as augmentation for the currently recognized target. */
                 this.addImageTargetCamDrawables(target, coinWidget);
 
