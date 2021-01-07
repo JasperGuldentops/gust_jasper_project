@@ -7,6 +7,7 @@ import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+//Options to show in top menu
 final List<String> choices = const <String>['Save', 'Delete'];
 
 class CurrencyDetailPage extends StatefulWidget {
@@ -50,6 +51,7 @@ class _CurrencyDetailPageState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //Show currencyname once loading is done
         title: Text(currency == null
             ? 'loading'
             : currency.name.capitalize() + " details"),
@@ -99,6 +101,7 @@ class _CurrencyDetailPageState extends State {
             Container(
               height: 15,
             ),
+            //Richtext area to hold textspans showing the website and website url
             RichText(
               text: TextSpan(
                 //Holds both website and URL text
@@ -131,6 +134,7 @@ class _CurrencyDetailPageState extends State {
                 ],
               ),
             ),
+            //Horizontal line divider to seperate owned cryptocurrency
             const Divider(
               color: Colors.black,
               height: 50,
@@ -144,6 +148,7 @@ class _CurrencyDetailPageState extends State {
                 controller: amountController,
                 style: textStyle,
                 keyboardType: TextInputType.number,
+                //Only allow digits and . to be used to prevent strings
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(
                     RegExp(r"^\d*\.?\d*"),
@@ -164,6 +169,7 @@ class _CurrencyDetailPageState extends State {
     }
   }
 
+  //Top menu actions
   void _menuSelected(String index) async {
     switch (index) {
       case "0": // Save currency
