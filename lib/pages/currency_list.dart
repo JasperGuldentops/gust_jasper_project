@@ -36,13 +36,6 @@ class _CurrencyListPageState extends State {
       appBar: AppBar(
         title: Text("Crypto Currencies"),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _navigateToScan();
-        },
-        tooltip: "Scan for crypto currency",
-        child: new Icon(Icons.camera_alt),
-      ),
       body: Container(
         padding: EdgeInsets.all(5.0),
         child: _currencyListItems(),
@@ -58,6 +51,7 @@ class _CurrencyListPageState extends State {
           color: Colors.white,
           elevation: 2.0,
           child: ListTile(
+            //Circular icon with first letter of cryptocurrency
             leading: CircleAvatar(
               backgroundColor: Colors.pink,
               child: Text(
@@ -65,8 +59,10 @@ class _CurrencyListPageState extends State {
             ),
             title: Text(this.currencies[position].name),
             subtitle: Text(
+                //This will transform price from double to string with dollar sign
                 Helper.doubleToPriceString(this.currencies[position].price)),
             onTap: () {
+              //Show more info about selected Cryptocurrency
               _navigateToDetail(this.currencies[position].id);
             },
           ),
@@ -75,6 +71,7 @@ class _CurrencyListPageState extends State {
     );
   }
 
+// Navigation
   void _navigateToDetail(String id) async {
     bool result = await Navigator.push(
       context,
@@ -83,9 +80,5 @@ class _CurrencyListPageState extends State {
     if (result == true) {
       _getCurrencies();
     }
-  }
-
-  void _navigateToScan() {
-    //Navigate to wikitude nonsense
   }
 }
