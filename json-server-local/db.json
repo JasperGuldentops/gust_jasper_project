@@ -1,69 +1,62 @@
 {
   "cryptocurrencies": [
     {
-      "id": "1e31218a-e44e-4285-820c-8282ee222035",
-      "name": "Bitcoin",
-      "price": 38336.43052898403,
-      "webUrl": "www.Bitcoin.com",
-      "amount": 2.7
-    },
-    {
-      "id": "21c795f5-1bfd-40c3-858e-e9d7e820c6d0",
-      "name": "Ethereum",
-      "price": 1226.2961972709513,
-      "webUrl": "www.Ethereum.com",
-      "amount": 56.9
-    },
-    {
-      "id": "7d793fa7-5fc6-432a-b26b-d1b10769d42e",
-      "name": "Dogecoin",
-      "price": 0.01023900725269859,
-      "webUrl": "www.Dogecoin.com",
+      "id": "c7c3697d-1b9c-42bf-9664-a366634ce2b3",
+      "name": "Litecoin",
+      "price": 173.91503782882393,
+      "webUrl": "www.Litecoin.com",
       "amount": 0
+    },
+    {
+      "name": "Bitcoin",
+      "price": 41084.27393859956,
+      "amount": 9.0034,
+      "webUrl": "www.Bitcoin.com",
+      "id": "1e31218a-e44e-4285-820c-8282ee222035"
     }
   ],
   "prices": [
     {
       "id": 1,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 41024.27393859956,
       "date": "2020-03-20 00:19:01.000"
     },
     {
       "id": 2,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 41584.27393859956,
       "date": "1975-03-20 00:18:00.000"
     },
     {
       "id": 3,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 41084.27393859956,
       "date": "2020-03-20 00:19:00.000"
     },
     {
       "id": 4,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 31084.27393859956,
       "date": "2020-03-21 00:20:00.000"
     },
     {
       "id": 5,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 41088.27393859956,
       "date": "2020-04-01 00:21:00.000"
     },
     {
       "id": 6,
       "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
-      "price": 897.4987,
+      "price": 41084.27393859956,
       "date": "2000-03-20 00:22:00.000"
     },
     {
-      "price": 1226.2961972709513,
-      "date": "2021-01-08T13:16:23.534376444Z",
-      "cryptocurrencyId": "21c795f5-1bfd-40c3-858e-e9d7e820c6d0",
-      "id": 7
+      "price": 173.91503782882393,
+      "date": "2021-01-08T15:14:48.555071382Z",
+      "cryptocurrencyId": "c7c3697d-1b9c-42bf-9664-a366634ce2b3",
+      "id": 16
     }
   ]
 }

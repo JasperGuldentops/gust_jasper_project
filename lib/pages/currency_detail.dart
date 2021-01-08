@@ -1,3 +1,5 @@
+import 'package:augmented_reality_plugin_wikitude/wikitude_plugin.dart';
+import 'package:augmented_reality_plugin_wikitude/wikitude_response.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,11 +7,12 @@ import 'package:gust_jasper_project/apis/currency_api.dart';
 import 'package:gust_jasper_project/helpers/helper.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
+import 'package:gust_jasper_project/pages/arcrypto.dart';
 import 'package:gust_jasper_project/widgets/pricelist.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //Options to show in top menu
-final List<String> choices = const <String>['Save', 'Delete'];
+final List<String> choices = const <String>['Delete'];
 
 class CurrencyDetailPage extends StatefulWidget {
   final String id; // id of Currency to show
@@ -20,6 +23,7 @@ class CurrencyDetailPage extends StatefulWidget {
 }
 
 class _CurrencyDetailPageState extends State {
+  List<String> features = ["image_tracking"];
   String id; // id of currency to show
   _CurrencyDetailPageState(this.id);
 
@@ -70,6 +74,13 @@ class _CurrencyDetailPageState extends State {
             ),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToScan();
+        },
+        tooltip: "Scan for crypto currency",
+        child: new Icon(Icons.camera_alt),
+      ),
         body: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(),
@@ -80,7 +91,37 @@ class _CurrencyDetailPageState extends State {
           ),
         ));
   }
+void _navigateToScan() {
+    this.checkDeviceCompatibility().then((value) => {
+          if (value.success)
+            {
+              this.requestARPermissions().then((value) => {
+                    if (value.success)
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ARCryptoPage()),
+                        )
+                      }
+                    else
+                      {
+                        debugPrint("AR permissions denied"),
+                        debugPrint(value.message)
+                      }
+                  })
+            }
+          else
+            {debugPrint("Device incompatible"), debugPrint(value.message)}
+        });
+  }
+  Future<WikitudeResponse> checkDeviceCompatibility() async {
+    return await WikitudePlugin.isDeviceSupporting(this.features);
+  }
 
+  Future<WikitudeResponse> requestARPermissions() async {
+    return await WikitudePlugin.requestARPermissions(this.features);
+  }
   _currencyDetails() {
     if (currency == null) {
       // show a ProgressIndicator until currency is loaded
@@ -97,7 +138,7 @@ class _CurrencyDetailPageState extends State {
           children: <Widget>[
             Text(
               //Show the price
-              "Price " + Helper.doubleToString(currency.price),
+              "Worth: " + Helper.doubleToString(currency.price*currency.amount),
               style: TextStyle(
                 fontSize: 20.0,
                 decoration: TextDecoration.none,
@@ -148,24 +189,45 @@ class _CurrencyDetailPageState extends State {
               endIndent: 0,
             ),
             Container(
-              width: 200,
-              child: TextField(
-                controller: amountController,
-                style: textStyle,
-                keyboardType: TextInputType.number,
-                //Only allow digits and . to be used to prevent strings
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                    RegExp(r"^\d*\.?\d*"),
-                  )
-                ],
-                decoration: InputDecoration(
-                  labelText: "Owned " + currency.name,
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+              width: 265,
+              child: Row(
+                children: [
+                  Container(
+                    width: 150,
+                    child: TextField(
+                      controller: amountController,
+                      style: textStyle,
+                      keyboardType: TextInputType.number,
+                      //Only allow digits and . to be used to prevent strings
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r"^\d*\.?\d*"),
+                        )
+                      ],
+                      decoration: InputDecoration(
+                        labelText: "Owned " + currency.name,
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 15,
+                  ),
+                  Container(
+                    width: 100,
+                    child: RaisedButton(
+                      onPressed: () {
+                        _saveCurrency();
+                      },
+                      color: Colors.blue,
+                      child: const Text('Save',
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -181,10 +243,7 @@ class _CurrencyDetailPageState extends State {
   //Top menu actions
   void _menuSelected(String index) async {
     switch (index) {
-      case "0": // Save currency
-        _saveCurrency();
-        break;
-      case "1": // Delete currency
+      case "0": // Delete currency
         _deleteCurrency();
         break;
       default:
@@ -212,4 +271,6 @@ class _CurrencyDetailPageState extends State {
       Navigator.pop(context, true);
     });
   }
+
+  
 }

@@ -17,8 +17,8 @@
     
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="gust_jasper_project"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Stonks"
+        android:icon="@mipmap/icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

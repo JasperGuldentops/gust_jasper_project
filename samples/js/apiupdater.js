@@ -1,4 +1,4 @@
-var url = 'https://nice-stingray-100.loca.lt';
+var url = 'https://little-bear-29.loca.lt';
 
 function checkData(data) {
     var currency = new Object();

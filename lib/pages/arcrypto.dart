@@ -11,7 +11,7 @@ class _ArCryptoPageState extends State<ARCryptoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Currencies"),
+        title: Text("Cryptoscanner"),
       ),
       body: Center(
           // Here we load the Widget with the AR crypto experience

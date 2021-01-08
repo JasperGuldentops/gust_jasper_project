@@ -23,10 +23,10 @@ class PriceListWidget extends StatelessWidget {
             MaterialStateProperty.resolveWith<Color>((states) => Colors.blue),
         columns: const <DataColumn>[
           DataColumn(
-            label: Text('Price'),
+            label: Text('Price',style:TextStyle(color:Colors.white)),
           ),
           DataColumn(
-            label: Text('Date'),
+            label: Text('Date',style:TextStyle(color:Colors.white)),
           ),
         ],
         rows: List<DataRow>.generate(
@@ -41,9 +41,10 @@ class PriceListWidget extends StatelessWidget {
             cells: [
               DataCell(
                 Container(
-                  width: 100,
+                  width: 120,
                   child:
-                      Text(Helper.doubleToString(currency.prices[index].price)),
+                    Helper.getText(index, currency)
+                      
                 ),
               ),
               DataCell(

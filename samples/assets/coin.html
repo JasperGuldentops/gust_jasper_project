@@ -21,16 +21,11 @@
 
     <p>Last updated: <br/><span id="time">Loading...</span>   <span id="date"></span></p>
 </div>
-    
-
     <script>
         $(document).ready(function(){
              getData();
 
-        });
-       
-        var url = 'https://honest-badger-24.loca.lt';
-
+        })
         function getData(){
             var str = window.location.href;
             var coin = str.substring(str.search("name=")+5,str.length-2);
