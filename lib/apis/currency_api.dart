@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CryptoCurrencyApi {
-  static String url = 'https://tough-dolphin-7.loca.lt';
-  //static String url = 'http://localhost:3000';
+  static String url = 'https://little-bear-29.loca.lt';
+
 
   static Future<List<CryptoCurrency>> fetchCurrencies() async {
     final response = await http.get(url + '/cryptocurrencies');
@@ -12,7 +12,7 @@ class CryptoCurrencyApi {
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       return jsonResponse
-          .map((currency) => new CryptoCurrency.fromJson(currency))
+          .map((currency) => new CryptoCurrency.fromJsonWithoutPrices(currency))
           .toList();
     } else {
       throw Exception('Currencies loaing failed!');
@@ -20,7 +20,8 @@ class CryptoCurrencyApi {
   }
 
   static Future<CryptoCurrency> fetchCurrency(String id) async {
-    final response = await http.get(url + '/cryptocurrencies/' + id);
+    final response =
+        await http.get(url + '/cryptocurrencies/' + id + '?_embed=prices');
     if (response.statusCode == 200) {
       return CryptoCurrency.fromJson(jsonDecode(response.body));
     } else {

@@ -1,3 +1,5 @@
+import 'package:augmented_reality_plugin_wikitude/wikitude_plugin.dart';
+import 'package:augmented_reality_plugin_wikitude/wikitude_response.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,6 +7,8 @@ import 'package:gust_jasper_project/apis/currency_api.dart';
 import 'package:gust_jasper_project/helpers/helper.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
+import 'package:gust_jasper_project/pages/arcrypto.dart';
+import 'package:gust_jasper_project/widgets/pricelist.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //Options to show in top menu
@@ -19,6 +23,7 @@ class CurrencyDetailPage extends StatefulWidget {
 }
 
 class _CurrencyDetailPageState extends State {
+  List<String> features = ["image_tracking"];
   String id; // id of currency to show
   _CurrencyDetailPageState(this.id);
 
@@ -50,32 +55,73 @@ class _CurrencyDetailPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //Show currencyname once loading is done
-        title: Text(currency == null
-            ? 'loading'
-            : currency.name.capitalize() + " details"),
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: _menuSelected,
-            itemBuilder: (BuildContext context) {
-              return choices.asMap().entries.map((entry) {
-                return PopupMenuItem<String>(
-                  value: entry.key.toString(),
-                  child: Text(entry.value),
-                );
-              }).toList();
-            },
+        appBar: AppBar(
+          //Show currencyname once loading is done
+          title: Text(currency == null
+              ? 'loading'
+              : currency.name.capitalize() + " details"),
+          actions: <Widget>[
+            PopupMenuButton<String>(
+              onSelected: _menuSelected,
+              itemBuilder: (BuildContext context) {
+                return choices.asMap().entries.map((entry) {
+                  return PopupMenuItem<String>(
+                    value: entry.key.toString(),
+                    child: Text(entry.value),
+                  );
+                }).toList();
+              },
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _navigateToScan();
+        },
+        tooltip: "Scan for crypto currency",
+        child: new Icon(Icons.camera_alt),
+      ),
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: Container(
+              padding: EdgeInsets.all(5.0),
+              child: _currencyDetails(),
+            ),
           ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.all(5.0),
-        child: _currencyDetails(),
-      ),
-    );
+        ));
+  }
+void _navigateToScan() {
+    this.checkDeviceCompatibility().then((value) => {
+          if (value.success)
+            {
+              this.requestARPermissions().then((value) => {
+                    if (value.success)
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ARCryptoPage()),
+                        )
+                      }
+                    else
+                      {
+                        debugPrint("AR permissions denied"),
+                        debugPrint(value.message)
+                      }
+                  })
+            }
+          else
+            {debugPrint("Device incompatible"), debugPrint(value.message)}
+        });
+  }
+  Future<WikitudeResponse> checkDeviceCompatibility() async {
+    return await WikitudePlugin.isDeviceSupporting(this.features);
   }
 
+  Future<WikitudeResponse> requestARPermissions() async {
+    return await WikitudePlugin.requestARPermissions(this.features);
+  }
   _currencyDetails() {
     if (currency == null) {
       // show a ProgressIndicator until currency is loaded
@@ -92,7 +138,7 @@ class _CurrencyDetailPageState extends State {
           children: <Widget>[
             Text(
               //Show the price
-              Helper.doubleToFullPriceString(currency.price),
+              "Worth: " + Helper.doubleToString(currency.price*currency.amount),
               style: TextStyle(
                 fontSize: 20.0,
                 decoration: TextDecoration.none,
@@ -184,6 +230,10 @@ class _CurrencyDetailPageState extends State {
                 ],
               ),
             ),
+            Container(
+              height: 30,
+            ),
+            PriceListWidget(currency: currency)
           ],
         ),
       );
@@ -221,4 +271,6 @@ class _CurrencyDetailPageState extends State {
       Navigator.pop(context, true);
     });
   }
+
+  
 }
