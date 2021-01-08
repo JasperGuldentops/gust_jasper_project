@@ -10,7 +10,7 @@
     {
       "id": "21c795f5-1bfd-40c3-858e-e9d7e820c6d0",
       "name": "Ethereum",
-      "price": 1207.6236993915952,
+      "price": 1226.2961972709513,
       "webUrl": "www.Ethereum.com",
       "amount": 56.9
     },
@@ -20,6 +20,50 @@
       "price": 0.01023900725269859,
       "webUrl": "www.Dogecoin.com",
       "amount": 0
+    }
+  ],
+  "prices": [
+    {
+      "id": 1,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "2020-03-20 00:19:01.000"
+    },
+    {
+      "id": 2,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "1975-03-20 00:18:00.000"
+    },
+    {
+      "id": 3,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "2020-03-20 00:19:00.000"
+    },
+    {
+      "id": 4,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "2020-03-21 00:20:00.000"
+    },
+    {
+      "id": 5,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "2020-04-01 00:21:00.000"
+    },
+    {
+      "id": 6,
+      "cryptocurrencyId": "1e31218a-e44e-4285-820c-8282ee222035",
+      "price": 897.4987,
+      "date": "2000-03-20 00:22:00.000"
+    },
+    {
+      "price": 1226.2961972709513,
+      "date": "2021-01-08T13:16:23.534376444Z",
+      "cryptocurrencyId": "21c795f5-1bfd-40c3-858e-e9d7e820c6d0",
+      "id": 7
     }
   ]
 }

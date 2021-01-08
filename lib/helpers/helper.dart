@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Helper {
   static double numberToDouble(dynamic value) {
     if (value is int) {
@@ -8,7 +10,12 @@ class Helper {
     return 0.00;
   }
 
-  static String doubleToPriceString(double price) {
-    return "Price: " + price.toStringAsFixed(2).replaceAll('.', ',') + " \$";
+  static String doubleToString(double price) {
+    return price.toStringAsFixed(4).replaceAll('.', ',') + " \$";
+  }
+
+  static String dateToString(DateTime date) {
+    final DateFormat formatter = DateFormat('dd-MM-yyyy, HH:mm:ss');
+    return formatter.format(date);
   }
 }
