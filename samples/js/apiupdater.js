@@ -1,4 +1,4 @@
-var url = 'https://honest-badger-24.loca.lt';
+var url = 'https://tough-dolphin-7.loca.lt';
 
 function checkData(data) {
     var currency = new Object();
@@ -30,7 +30,7 @@ function postData(currency) {
     xhr.open("POST", url + "/cryptocurrencies", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(currency));
-    console.log('New data posted');
+
     xhr.onloadend = function () {
         console.log('New data posted');
     };
@@ -41,7 +41,7 @@ function putData(currency) {
     xhr.open("PUT", url + "/cryptocurrencies/" + currency.id, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(currency));
-    console.log('Data updated');
+
     xhr.onloadend = function () {
         console.log('Data updated');
     };

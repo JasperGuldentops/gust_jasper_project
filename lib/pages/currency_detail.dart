@@ -8,7 +8,7 @@ import 'package:gust_jasper_project/extensions/string_extension.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //Options to show in top menu
-final List<String> choices = const <String>['Save', 'Delete'];
+final List<String> choices = const <String>['Delete'];
 
 class CurrencyDetailPage extends StatefulWidget {
   final String id; // id of Currency to show
@@ -92,7 +92,7 @@ class _CurrencyDetailPageState extends State {
           children: <Widget>[
             Text(
               //Show the price
-              Helper.doubleToPriceString(currency.price),
+              Helper.doubleToFullPriceString(currency.price),
               style: TextStyle(
                 fontSize: 20.0,
                 decoration: TextDecoration.none,
@@ -143,24 +143,45 @@ class _CurrencyDetailPageState extends State {
               endIndent: 0,
             ),
             Container(
-              width: 200,
-              child: TextField(
-                controller: amountController,
-                style: textStyle,
-                keyboardType: TextInputType.number,
-                //Only allow digits and . to be used to prevent strings
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.allow(
-                    RegExp(r"^\d*\.?\d*"),
-                  )
-                ],
-                decoration: InputDecoration(
-                  labelText: "Owned " + currency.name,
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+              width: 265,
+              child: Row(
+                children: [
+                  Container(
+                    width: 150,
+                    child: TextField(
+                      controller: amountController,
+                      style: textStyle,
+                      keyboardType: TextInputType.number,
+                      //Only allow digits and . to be used to prevent strings
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r"^\d*\.?\d*"),
+                        )
+                      ],
+                      decoration: InputDecoration(
+                        labelText: "Owned " + currency.name,
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  Container(
+                    width: 15,
+                  ),
+                  Container(
+                    width: 100,
+                    child: RaisedButton(
+                      onPressed: () {
+                        _saveCurrency();
+                      },
+                      color: Colors.blue,
+                      child: const Text('Save',
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -172,10 +193,7 @@ class _CurrencyDetailPageState extends State {
   //Top menu actions
   void _menuSelected(String index) async {
     switch (index) {
-      case "0": // Save currency
-        _saveCurrency();
-        break;
-      case "1": // Delete currency
+      case "0": // Delete currency
         _deleteCurrency();
         break;
       default:
