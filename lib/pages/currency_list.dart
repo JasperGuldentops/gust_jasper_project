@@ -60,7 +60,8 @@ class _CurrencyListPageState extends State {
             title: Text(this.currencies[position].name),
             subtitle: Text(
                 //This will transform price from double to string with dollar sign
-                Helper.doubleToPriceString(this.currencies[position].price)),
+                "Price " +
+                    Helper.doubleToString(this.currencies[position].price)),
             onTap: () {
               //Show more info about selected Cryptocurrency
               _navigateToDetail(this.currencies[position].id);

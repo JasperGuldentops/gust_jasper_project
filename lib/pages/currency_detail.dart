@@ -5,6 +5,7 @@ import 'package:gust_jasper_project/apis/currency_api.dart';
 import 'package:gust_jasper_project/helpers/helper.dart';
 import 'package:gust_jasper_project/models/cryptocurrency.dart';
 import 'package:gust_jasper_project/extensions/string_extension.dart';
+import 'package:gust_jasper_project/widgets/pricelist.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 //Options to show in top menu
@@ -50,30 +51,34 @@ class _CurrencyDetailPageState extends State {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        //Show currencyname once loading is done
-        title: Text(currency == null
-            ? 'loading'
-            : currency.name.capitalize() + " details"),
-        actions: <Widget>[
-          PopupMenuButton<String>(
-            onSelected: _menuSelected,
-            itemBuilder: (BuildContext context) {
-              return choices.asMap().entries.map((entry) {
-                return PopupMenuItem<String>(
-                  value: entry.key.toString(),
-                  child: Text(entry.value),
-                );
-              }).toList();
-            },
+        appBar: AppBar(
+          //Show currencyname once loading is done
+          title: Text(currency == null
+              ? 'loading'
+              : currency.name.capitalize() + " details"),
+          actions: <Widget>[
+            PopupMenuButton<String>(
+              onSelected: _menuSelected,
+              itemBuilder: (BuildContext context) {
+                return choices.asMap().entries.map((entry) {
+                  return PopupMenuItem<String>(
+                    value: entry.key.toString(),
+                    child: Text(entry.value),
+                  );
+                }).toList();
+              },
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(),
+            child: Container(
+              padding: EdgeInsets.all(5.0),
+              child: _currencyDetails(),
+            ),
           ),
-        ],
-      ),
-      body: Container(
-        padding: EdgeInsets.all(5.0),
-        child: _currencyDetails(),
-      ),
-    );
+        ));
   }
 
   _currencyDetails() {
@@ -92,7 +97,7 @@ class _CurrencyDetailPageState extends State {
           children: <Widget>[
             Text(
               //Show the price
-              Helper.doubleToPriceString(currency.price),
+              "Price " + Helper.doubleToString(currency.price),
               style: TextStyle(
                 fontSize: 20.0,
                 decoration: TextDecoration.none,
@@ -163,6 +168,10 @@ class _CurrencyDetailPageState extends State {
                 ),
               ),
             ),
+            Container(
+              height: 30,
+            ),
+            PriceListWidget(currency: currency)
           ],
         ),
       );
